@@ -5,10 +5,11 @@ and open the template in the editor.
 */
 /* 
     Created on : 13.08.2014, 21:22:43
-    Author     : dominik
+    Author     : gnorax
 */
 
 *{
 	color: black;
 	background: white;
+	font-family: monospace;
 }
