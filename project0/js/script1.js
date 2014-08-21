@@ -5,11 +5,39 @@
  */
 
 
-var f = 0;
-function log(){
-	console.log(f);
-	f+=1;
+var Timer = window.setInterval(function(){tick();}, 1000);
+
+function tick(){
+	money+=auto;
+	printCurrentRessources();
 }
-function print(){
-	alert(f);
-}
+
+var money = 0;
+var auto = 0;
+
+function getMoney(){
+	money += 1+auto;
+	printCurrentRessources();
+};
+
+function printCurrentRessources(){
+	document.getElementById("money").innerHTML = money;
+	document.getElementById("auto").innerHTML = auto;
+};
+
+function calcAutoPrice(){
+	return auto*10;
+};
+
+function printCurrentPrices(){
+	document.getElementById("autoPrice").innerHTML = calcAutoPrice();
+};
+
+function getAutomaton(){
+	if (money >= calcAutoPrice()){
+		money -= calcAutoPrice();
+		auto+=1;
+		printCurrentPrices();
+		printCurrentRessources();
+	}
+};
