@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-
 var Timer = window.setInterval(function(){tick();}, 1000);
 
 function tick(){
