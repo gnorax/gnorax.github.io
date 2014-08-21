@@ -10,6 +10,60 @@ and open the template in the editor.
 
 *{
 	color: black;
-	background: white;
-	font-family: monospace, Arial, sans-serif;
+	/*background: white;*/
+	font-family: Arial, sans-serif;
+	
+	margin: auto;
+}
+
+.header {
+	font-size: 3em;
+	text-align: center;
+	position: relative;
+	background: blue;
+}
+
+.navbar {
+	font-size: 2em;
+	/*position: relative;*/
+	background: green;
+}
+
+.main {
+	font-size: 1.5em;
+	position: relative;
+	background: orange;
+}
+.footer{
+	font-size: 0.8em;
+	clear: both;
+	position: relative;
+	background: red;
+}
+
+.left{	
+	float:left;
+	width: 30%;
+	overflow: auto;
+/*	display: inline-block;
+	max-height: 100%;
+    max-width: 30%;
+	min-width: 30%;
+	position: fixed;
+	text-align: center;
+	vertical-align: top;*/
+}
+.right{
+	float:right;
+	width: 65%;
+	overflow: auto;
+}
+
+.list-inline{
+	text-align: center;
+    /*list-style: none outside none;*/
+}
+.list-inline li{
+	border: 1px solid black;
+	display: inline-block;
 }
