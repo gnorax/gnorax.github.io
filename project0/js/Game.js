@@ -104,13 +104,30 @@ function printCurrentPrices(){
 	document.getElementById("autoPrice").innerHTML = game.buildings[0].currentCost;
 };
 
-function getAutomaton(){
-	b = game.buildings[0];
+function getAutomaton(number){
+	b = game.buildings[number];
 	console.log(b);
 	if (b instanceof TimeBasedBuilding){
 		b.add();
 	}else{throw "Is not A TBB anymore";}
-	game.buildings[0]=b;
+	game.buildings[number]=b;
 	game.moneyPerSecond = globalProduction();
 	printCurrentPrices();
 };
+
+
+function addBuilding(){
+	var currentLastBuildingInndex = game.buildings.length-1;
+	var currBuilding= game.buildings[game.buildings.length-1];
+	var newBuilding = new TimeBasedBuilding(currBuilding.costInSeconds*2, currBuilding.baseProduction*1.5);
+	newBuilding.name = "TBB " + game.buildings.length-1;
+	game.buildings[game.buildings.length] = newBuilding;
+	
+	
+	var newButton = document.createElement("button");
+    newButton.setAttribute("onclick", "getAutomaton("+currentLastBuildingInndex+")");
+	var node = document.createTextNode("add "+currentLastBuildingInndex);
+	newButton.appendChild(node);
+	var element = document.getElementById("BuildingScreen");
+	element.appendChild(newButton);
+}
