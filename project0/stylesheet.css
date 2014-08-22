@@ -49,7 +49,8 @@ and open the template in the editor.
 .right{
 	float:right;
 	width: 65%;
-	overflow: auto;
+	height: auto;
+	/*overflow: auto;*/
 }
 
 .list-inline{
@@ -70,10 +71,16 @@ and open the template in the editor.
 
 #ClickerScreen {
 	visibility: visible;
+	width: auto;
+	height: auto;
 }
 #BuildingScreen {
 	visibility: hidden;
+	width: 0;
+	height: 0;
 }
 #UpgradeScreen {
 	visibility: hidden;
+	width: 0;
+	height: 0;
 }
