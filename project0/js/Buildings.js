@@ -21,6 +21,7 @@ function TimeBasedBuilding(costInSeconds, baseProduction){
 	this.costInSeconds = costInSeconds;
 	this.baseProduction = baseProduction;
 	this.currentCost = baseProduction*10;
+	this.type = "TimeBasedBuilding";
 }
 
 TimeBasedBuilding.prototype = new GeneralBuilding();
@@ -30,6 +31,7 @@ function DerivedBuilding(baseCost, costType, baseProduction){
 	this.baseCost = baseCost;
 	this.costType = costType;
 	this.baseProduction = baseProduction;
+	this.type = "DerivedBuilding";
 }
 
 DerivedBuilding.prototype = new GeneralBuilding();
