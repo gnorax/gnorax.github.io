@@ -66,3 +66,14 @@ and open the template in the editor.
 	overflow: auto;
 	width: 30%;
 }
+
+
+#ClickerScreen {
+	visibility: visible;
+}
+#BuildingScreen {
+	visibility: hidden;
+}
+#UpgradeScreen {
+	visibility: hidden;
+}
