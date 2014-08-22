@@ -1,9 +1,10 @@
 # README #
 
-##TODO:
+## DONE:
+* Click Button -> increments counter
+* show current value
 
-+ Click Button -> increments counter
-+ show current value
+##TODO:
 + store/load
 + different screens
 + upgrades
