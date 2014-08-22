@@ -35,3 +35,31 @@ function hideAll(){
 	document.getElementById('UpgradeScreen').style.width = "0";
 	document.getElementById('UpgradeScreen').style.height = "0";
 }
+
+function printButtons(){
+	var oldElement = document.getElementById("removeMe");
+	if (oldElement!==null){
+		document.getElementById("BuildingScreen").removeChild(oldElement);
+	}else{
+		console.log(oldElement +" could not be removed");
+	}
+	
+	var element = document.createElement("div");
+	element.setAttribute("id", "removeMe");
+	for (var i in game.buildings){
+			var button = generateButton(i);
+			element.appendChild(button);
+//			console.log(button);
+//			console.log(element);
+		}
+	document.getElementById("BuildingScreen").appendChild(element);
+};
+
+function generateButton(i){
+	var newButton = document.createElement("button");
+	newButton.setAttribute("onclick", "getAutomaton("+i+")");
+	newButton.setAttribute("title", "something");
+	var node = document.createTextNode("add "+i);
+	newButton.appendChild(node);
+	return newButton;
+};

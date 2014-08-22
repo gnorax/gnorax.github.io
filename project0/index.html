@@ -5,7 +5,7 @@
 	
 	<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
 	<script src="js/Buildings.js" type="text/javascript" ></script>
-	<script async src="js/ScreenHandler.js" type="text/javascript" ></script>
+	<script src="js/ScreenHandler.js" type="text/javascript" ></script>
 	<script src="js/Game.js" type="text/javascript" ></script>
 
 	<!--auto load-->
@@ -23,7 +23,7 @@
 	<div class="navbar">
 		<ul class="list-inline">
 			<li><button onclick="goToClickerScreen()">Clicker</button></li>
-			<li><button onclick="goToBuildingScreen()">Buildings</button></li>
+			<li><button onclick="goToBuildingScreen(); printButtons();">Buildings</button></li>
 			<li><button onclick="goToUpgradeScreen()">Upgrades</button></li>
 		</ul>
 	</div>
@@ -34,6 +34,7 @@
 			<span>ressources</span> <br>
 			money: <span id="money">0</span><br>
 			automata: <span id="auto">0</span><br>
+			automata Price: <span id="autoPrice" title="Hoverover Text">0</span><br>
 			
 		</div>
 		<div class="right">
@@ -44,13 +45,12 @@
 			</div>
 			
 			<div id="BuildingScreen">
-				automata Price: <span id="autoPrice" title="Hoverover Text">0</span><br>
-				<button onclick="getAutomaton(0)">
+<!--				<button onclick="getAutomaton(0)">
 					getAutomaton
 				</button>
 				<button onclick="addBuilding()">
 					addBuilding
-				</button>
+				</button>-->
 			</div>
 			
 			<div id="UpgradeScreen">

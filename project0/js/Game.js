@@ -14,7 +14,9 @@ var game = {
 };
 
 function init(){
-		console.log(localStorage.getItem('storedGame'));
+	// what do I load
+	console.log(localStorage.getItem('storedGame'));
+	
 	if (localStorage.getItem('storedGame')!==null){
 		load();
 	}else{
@@ -29,7 +31,7 @@ function newGame(){
 	game.buildings = [];
 	
 	game.buildings[0] = new TimeBasedBuilding(10,1);
-	game.buildings[0].name = "Tier 1 TBB";
+	game.buildings[0].name = "TBB 0";
 }
 
 function globalProduction(){
@@ -62,6 +64,7 @@ function load() {
 				newB = new TimeBasedBuilding(b.costInSeconds, b.baseProduction);
 				newB.amount = b.amount;
 				newB.name = b.name;
+				newB.currentCost = b.currentCost;
 				game.buildings[i]=newB;
 			}else if(b.type==="DerivedBuilding"){
 				newB = new DerivedBuilding(b.baseCost, b.costType, b.baseProduction);
@@ -85,6 +88,9 @@ var TickTimer = window.setInterval(function(){tick();}, 1000);
 function tick(){
 	game.money += game.moneyPerSecond;
 	printCurrentRessources();
+	if (game.buildings[game.buildings.length-1].amount>2){
+		addBuilding();
+	}
 }
 
 var SaveTimer = window.setInterval(function(){save();}, 15*1000);
@@ -117,17 +123,9 @@ function getAutomaton(number){
 
 
 function addBuilding(){
-	var currentLastBuildingInndex = game.buildings.length-1;
 	var currBuilding= game.buildings[game.buildings.length-1];
 	var newBuilding = new TimeBasedBuilding(currBuilding.costInSeconds*2, currBuilding.baseProduction*1.5);
-	newBuilding.name = "TBB " + game.buildings.length-1;
+	newBuilding.name = "TBB " + (game.buildings.length).toString();
 	game.buildings[game.buildings.length] = newBuilding;
-	
-	
-	var newButton = document.createElement("button");
-    newButton.setAttribute("onclick", "getAutomaton("+currentLastBuildingInndex+")");
-	var node = document.createTextNode("add "+currentLastBuildingInndex);
-	newButton.appendChild(node);
-	var element = document.getElementById("BuildingScreen");
-	element.appendChild(newButton);
-}
+	printButtons();
+};
