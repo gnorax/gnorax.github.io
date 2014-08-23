@@ -43,23 +43,70 @@ function printButtons(){
 	}else{
 		console.log(oldElement +" could not be removed");
 	}
-	
+		
 	var element = document.createElement("div");
 	element.setAttribute("id", "removeMe");
-	for (var i in game.buildings){
+	for (var i in game.timeBasedBuildings){
 			var button = generateButton(i);
 			element.appendChild(button);
 //			console.log(button);
 //			console.log(element);
 		}
 	document.getElementById("BuildingScreen").appendChild(element);
+	
+	printButtonText();
 };
 
 function generateButton(i){
+	var divBox = document.createElement("li");
+//	divBox.setAttribute("title", "something");
+	divBox.setAttribute("id", "buyButtonTBB"+i.toString());
+	divBox.setAttribute("class", "buyBox");
+	
+	var buyCost = document.createElement("span");
+	buyCost.setAttribute("id", "costTBB"+i.toString());
+	var textNode = document.createTextNode("current cost");
+	buyCost.appendChild(textNode);
+	divBox.appendChild(buyCost);
+	
+	var br = document.createElement("br");
+	divBox.appendChild(br);
+	
+	var amount = document.createElement("span");
+	amount.setAttribute("id", "amountTBB"+i.toString());
+	var textNode = document.createTextNode("amount");
+	amount.appendChild(textNode);
+	divBox.appendChild(amount);
+	
+	var br = document.createElement("br");
+	divBox.appendChild(br);
+	
 	var newButton = document.createElement("button");
 	newButton.setAttribute("onclick", "getAutomaton("+i+")");
-	newButton.setAttribute("title", "something");
-	var node = document.createTextNode("add "+i);
+	var node = document.createTextNode("add TBB "+i);
 	newButton.appendChild(node);
-	return newButton;
+	divBox.appendChild(newButton);
+	divBox.style.width = "30%";
+	divBox.style.border = "black solid 2px";
+	return divBox;
+};
+
+
+function printCurrentRessources(){
+	document.getElementById("money").innerHTML = game.money;
+	document.getElementById("moneyPerSecond").innerHTML = game.moneyPerSecond;
+	printButtonText();
+};
+
+function printButtonText(){
+	for (var i in game.timeBasedBuildings){
+		var costTBB = document.getElementById("costTBB"+i.toString());
+		if (costTBB !==null){
+			costTBB.innerHTML = "cost: " + game.timeBasedBuildings[i].currentCost.toString();
+		}
+		costTBB = document.getElementById("amountTBB"+i.toString());
+		if (costTBB !==null){
+			costTBB.innerHTML = "amount: " + game.timeBasedBuildings[i].amount.toString();
+		}
+	}
 };

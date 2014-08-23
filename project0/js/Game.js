@@ -9,7 +9,7 @@ var game = {
 	money:0,
 	moneyPerSecond:0,
 	
-	buildings:[],
+	timeBasedBuildings:[],
 	lastSave: undefined
 };
 
@@ -28,22 +28,17 @@ function newGame(){
 	game.money =0;
 	game.moneyPerSecond = 0;
 	game.lastSave =  undefined;
-	game.buildings = [];
+	game.timeBasedBuildings = [];
 	
-	game.buildings[0] = new TimeBasedBuilding(10,1);
-	game.buildings[0].name = "TBB 0";
+	game.timeBasedBuildings[0] = new TimeBasedBuilding(10,1);
+	game.timeBasedBuildings[0].name = "TBB 0";
 }
 
 function globalProduction(){
 	var gProd = 0;
-	for (var i in game.buildings){
-		var building = game.buildings[i];
-		if (building instanceof TimeBasedBuilding){
-			gProd += building.produce();
-		}else{
-			console.log(building instanceof TimeBasedBuilding);
-			console.log(building);
-		}
+	for (var i in game.timeBasedBuildings){
+		var building = game.timeBasedBuildings[i];
+		gProd += building.produce();
 	}
 	return gProd;
 }
@@ -58,29 +53,23 @@ function save(){
 function load() {
 	if (localStorage.getItem('storedGame')!==null){
 		game = JSON.parse(window.localStorage['storedGame']);
-		for (var i in game.buildings){
-			var b = game.buildings[i];
-			if (b.type==="TimeBasedBuilding"){
-				newB = new TimeBasedBuilding(b.costInSeconds, b.baseProduction);
-				newB.amount = b.amount;
-				newB.name = b.name;
-				newB.currentCost = b.currentCost;
-				game.buildings[i]=newB;
-			}else if(b.type==="DerivedBuilding"){
-				newB = new DerivedBuilding(b.baseCost, b.costType, b.baseProduction);
-				newB.amount = b.amount;
-				newB.name = b.name;
-				game.buildings[i]=newB;
-			}else{
-				throw "unknown building"
-			}
+		for (var i in game.timeBasedBuildings){
+			var b = game.timeBasedBuildings[i];
+			newB = new TimeBasedBuilding(b.costInSeconds, b.baseProduction);
+			newB.amount = b.amount;
+			newB.name = b.name;
+			newB.currentCost = b.currentCost;
+			game.timeBasedBuildings[i]=newB;
 		}
 	}
-}
+};
+
 function wipe() {
-	localStorage.removeItem('storedGame');
-	newGame();
-}
+	if (confirm("do you want to wipe your save state")){
+		localStorage.removeItem('storedGame');
+		newGame();
+	}
+};
 
 
 var TickTimer = window.setInterval(function(){tick();}, 1000);
@@ -88,7 +77,7 @@ var TickTimer = window.setInterval(function(){tick();}, 1000);
 function tick(){
 	game.money += game.moneyPerSecond;
 	printCurrentRessources();
-	if (game.buildings[game.buildings.length-1].amount>2){
+	if (game.timeBasedBuildings[game.timeBasedBuildings.length-1].amount>2){
 		addBuilding();
 	}
 }
@@ -96,36 +85,27 @@ function tick(){
 var SaveTimer = window.setInterval(function(){save();}, 15*1000);
 
 function getMoney(){
-	game.money += 1;
+	game.money += 1*1000;
 	printCurrentRessources();
 };
 
-function printCurrentRessources(){
-	document.getElementById("money").innerHTML = game.money;
-	document.getElementById("auto").innerHTML = game.buildings[0].amount;
-	printCurrentPrices();
-};
-
-function printCurrentPrices(){
-	document.getElementById("autoPrice").innerHTML = game.buildings[0].currentCost;
-};
 
 function getAutomaton(number){
-	b = game.buildings[number];
+	b = game.timeBasedBuildings[number];
 	console.log(b);
 	if (b instanceof TimeBasedBuilding){
 		b.add();
 	}else{throw "Is not A TBB anymore";}
-	game.buildings[number]=b;
+	game.timeBasedBuildings[number]=b;
 	game.moneyPerSecond = globalProduction();
-	printCurrentPrices();
+	printButtonText();
 };
 
 
 function addBuilding(){
-	var currBuilding= game.buildings[game.buildings.length-1];
-	var newBuilding = new TimeBasedBuilding(currBuilding.costInSeconds*2, currBuilding.baseProduction*1.5);
-	newBuilding.name = "TBB " + (game.buildings.length).toString();
-	game.buildings[game.buildings.length] = newBuilding;
+	var currBuilding= game.timeBasedBuildings[game.timeBasedBuildings.length-1];
+	var newBuilding = new TimeBasedBuilding(currBuilding.costInSeconds*2, currBuilding.baseProduction*3);
+	newBuilding.name = "TBB " + (game.timeBasedBuildings.length).toString();
+	game.timeBasedBuildings[game.timeBasedBuildings.length] = newBuilding;
 	printButtons();
 };

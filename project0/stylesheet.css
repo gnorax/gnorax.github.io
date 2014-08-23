@@ -59,13 +59,18 @@ and open the template in the editor.
 	margin:0;
 	padding:0;
 	border: 0;
-	
 }
 .list-inline li{
 	display: inline-block;
 	/*border: 1px solid black;*/
 	overflow: auto;
 	width: 30%;
+}
+
+
+#buyBox {
+	width: 25%;
+	border: black 2px solid;
 }
 
 
