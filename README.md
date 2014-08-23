@@ -13,3 +13,5 @@
 * pressure
 * individual upgrades
 * inflation per click
+* change title
+* smaller header for Mobile
