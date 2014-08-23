@@ -102,9 +102,9 @@ function generateButton(i){
 
 
 function printCurrentRessources(){
-	document.getElementById("money").innerHTML = game.money;
-	document.getElementById("moneyPerSecond").innerHTML = game.moneyPerSecond;
-	document.getElementById("inflation").innerHTML = game.inflation;
+	document.getElementById("money").innerHTML = niceNumbers(game.money);
+	document.getElementById("moneyPerSecond").innerHTML = niceNumbers(game.moneyPerSecond);
+	document.getElementById("inflation").innerHTML = niceNumbers(game.inflation);
 	printButtonText();
 };
 
@@ -116,15 +116,15 @@ function printButtonText(){
 	for (var i in game.timeBasedBuildings){
 		var costTBB = document.getElementById("costTBB"+i.toString());
 		if (costTBB !==null){
-			costTBB.innerHTML = "cost: " + game.timeBasedBuildings[i].currentCost.toString();
+			costTBB.innerHTML = "cost: " + niceNumbers(game.timeBasedBuildings[i].currentCost);
 		}
 		costTBB = document.getElementById("amountTBB"+i.toString());
 		if (costTBB !==null){
-			costTBB.innerHTML = "amount: " + game.timeBasedBuildings[i].amount.toString();
+			costTBB.innerHTML = "amount: " + niceNumbers(game.timeBasedBuildings[i].amount);
 		}
 		costTBB = document.getElementById("productionTBB"+i.toString());
 		if (costTBB !==null){
-			costTBB.innerHTML = "production: " + game.timeBasedBuildings[i].baseProduction.toString();
+			costTBB.innerHTML = "production: " + niceNumbers(game.timeBasedBuildings[i].baseProduction);
 		}
 	}
 };
@@ -136,15 +136,19 @@ function printButtonText(){
  * @returns string
  */
 function niceNumbers(number){
-	var digits = 2;
+	var digits = 3;
 	
 	var e10=0;
-	while(number>1000){
-		e10++;
+	while(number>=1000){
+		e10+=3;
 		number/=1000;
 	}
 	number *= Math.pow(10, digits);
 	number = Math.floor(number) / Math.pow(10, digits);
 	
-	return number.toString()+"e"+e10.toString();
+	var ret = number.toString();
+	if (e10!==0){
+		 ret += " e"+e10.toString();
+	}
+	return ret;
 };
