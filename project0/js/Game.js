@@ -76,7 +76,7 @@ var TickTimer = window.setInterval(function(){tick();}, 1000);
 
 function tick(){
 	game.money += game.moneyPerSecond;
-	printCurrentRessources();
+	printAll();
 	if (game.timeBasedBuildings[game.timeBasedBuildings.length-1].amount>2){
 		addBuilding();
 	}
@@ -86,7 +86,7 @@ var SaveTimer = window.setInterval(function(){save();}, 15*1000);
 
 function getMoney(){
 	game.money += 1*1000;
-	printCurrentRessources();
+	printAll();
 };
 
 
@@ -98,7 +98,7 @@ function getAutomaton(number){
 	}else{throw "Is not A TBB anymore";}
 	game.timeBasedBuildings[number]=b;
 	game.moneyPerSecond = globalProduction();
-	printButtonText();
+	printAll();
 };
 
 

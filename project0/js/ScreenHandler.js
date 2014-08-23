@@ -98,6 +98,10 @@ function printCurrentRessources(){
 	printButtonText();
 };
 
+function printAll(){
+	printCurrentRessources();
+}
+
 function printButtonText(){
 	for (var i in game.timeBasedBuildings){
 		var costTBB = document.getElementById("costTBB"+i.toString());

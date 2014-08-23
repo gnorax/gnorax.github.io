@@ -54,11 +54,13 @@ and open the template in the editor.
 }
 
 .list-inline{
-	text-align: center;
-    list-style: none outside none;
+	list-style: none outside none;
 	margin:0;
 	padding:0;
 	border: 0;
+}
+.centered{
+	text-align: center;
 }
 .list-inline li{
 	display: inline-block;
