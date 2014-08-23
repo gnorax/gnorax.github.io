@@ -8,8 +8,10 @@
 var game = {
 	money:0,
 	moneyPerSecond:0,
+	inflation:0,
 	
 	timeBasedBuildings:[],
+	inflationBuildings:[],
 	lastSave: undefined
 };
 
@@ -27,12 +29,17 @@ function init(){
 function newGame(){
 	game.money =0;
 	game.moneyPerSecond = 0;
+	game.inflation = 0;
 	game.lastSave =  undefined;
 	game.timeBasedBuildings = [];
+	game.inflationBuildings = [];
 	
 	game.timeBasedBuildings[0] = new TimeBasedBuilding(10,1);
 	game.timeBasedBuildings[0].name = "TBB 0";
-}
+	
+	game.inflationBuildings[0] = new InflationBuilding(100,1);
+	game.inflationBuildings[0].name = "Inf 0";
+};
 
 function globalProduction(){
 	var gProd = 0;
@@ -41,7 +48,15 @@ function globalProduction(){
 		gProd += building.produce();
 	}
 	return gProd;
-}
+};
+function globalInflation(){
+	var gInf = 0;
+	for (var i in game.inflationBuildings){
+		var building = game.inflationBuildings[i];
+		gInf += building.inflationPower;
+	}
+	return gInf;
+};
 
 
 function save(){
@@ -55,11 +70,21 @@ function load() {
 		game = JSON.parse(window.localStorage['storedGame']);
 		for (var i in game.timeBasedBuildings){
 			var b = game.timeBasedBuildings[i];
-			newB = new TimeBasedBuilding(b.costInSeconds, b.baseProduction);
+			var newB = new TimeBasedBuilding(b.costInSeconds, b.baseProduction);
+			if (b.amount===undefined){b.amount=0;}
 			newB.amount = b.amount;
 			newB.name = b.name;
 			newB.currentCost = b.currentCost;
 			game.timeBasedBuildings[i]=newB;
+		}
+		for (var i in game.inflationBuildings){
+			var b = game.inflationBuildings[i];
+			var newB = new InflationBuilding(b.baseCost, b.power);
+			if (b.amount===undefined){b.amount=0;}
+			newB.amount = b.amount;
+			newB.name = b.name;
+			newB.currentCost = b.currentCost;
+			game.inflationBuildings[i]=newB;
 		}
 	}
 };
@@ -76,9 +101,12 @@ var TickTimer = window.setInterval(function(){tick();}, 1000);
 
 function tick(){
 	game.money += game.moneyPerSecond;
+	for (var i in game.inflationBuildings){
+		game.inflationBuildings[i].produce();
+	}
 	printAll();
 	if (game.timeBasedBuildings[game.timeBasedBuildings.length-1].amount>2){
-		addBuilding();
+		addTBB();
 	}
 }
 
@@ -90,7 +118,7 @@ function getMoney(){
 };
 
 
-function getAutomaton(number){
+function buyTBB(number){
 	b = game.timeBasedBuildings[number];
 	console.log(b);
 	if (b instanceof TimeBasedBuilding){
@@ -100,9 +128,21 @@ function getAutomaton(number){
 	game.moneyPerSecond = globalProduction();
 	printAll();
 };
+function buyInflation(number){
+	if (number===undefined){number=0;}
+	b = game.inflationBuildings[number];
+	console.log(b);
+	if (b instanceof InflationBuilding){
+		b.add();
+		b.calculateInflationPower();
+	}else{throw "Is not an IB anymore";}
+	game.inflationBuildings[number]=b;
+	game.inflation = globalInflation();
+	printAll();
+};
 
 
-function addBuilding(){
+function addTBB(){
 	var currBuilding= game.timeBasedBuildings[game.timeBasedBuildings.length-1];
 	var newBuilding = new TimeBasedBuilding(currBuilding.costInSeconds*2, currBuilding.baseProduction*3);
 	newBuilding.name = "TBB " + (game.timeBasedBuildings.length).toString();

@@ -81,9 +81,18 @@ function generateButton(i){
 	var br = document.createElement("br");
 	divBox.appendChild(br);
 	
+	var amount = document.createElement("span");
+	amount.setAttribute("id", "productionTBB"+i.toString());
+	var textNode = document.createTextNode("production");
+	amount.appendChild(textNode);
+	divBox.appendChild(amount);
+	
+	var br = document.createElement("br");
+	divBox.appendChild(br);
+	
 	var newButton = document.createElement("button");
-	newButton.setAttribute("onclick", "getAutomaton("+i+")");
-	var node = document.createTextNode("add TBB "+i);
+	newButton.setAttribute("onclick", "buyTBB("+i+")");
+	var node = document.createTextNode("buy TBB "+i);
 	newButton.appendChild(node);
 	divBox.appendChild(newButton);
 	divBox.style.width = "30%";
@@ -95,6 +104,7 @@ function generateButton(i){
 function printCurrentRessources(){
 	document.getElementById("money").innerHTML = game.money;
 	document.getElementById("moneyPerSecond").innerHTML = game.moneyPerSecond;
+	document.getElementById("inflation").innerHTML = game.inflation;
 	printButtonText();
 };
 
@@ -112,5 +122,29 @@ function printButtonText(){
 		if (costTBB !==null){
 			costTBB.innerHTML = "amount: " + game.timeBasedBuildings[i].amount.toString();
 		}
+		costTBB = document.getElementById("productionTBB"+i.toString());
+		if (costTBB !==null){
+			costTBB.innerHTML = "production: " + game.timeBasedBuildings[i].baseProduction.toString();
+		}
 	}
+};
+
+/*
+ * creates a nicely formated string from a number
+ * 
+ * @param number
+ * @returns string
+ */
+function niceNumbers(number){
+	var digits = 2;
+	
+	var e10=0;
+	while(number>1000){
+		e10++;
+		number/=1000;
+	}
+	number *= Math.pow(10, digits);
+	number = Math.floor(number) / Math.pow(10, digits);
+	
+	return number.toString()+"e"+e10.toString();
 };

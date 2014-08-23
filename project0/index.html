@@ -17,7 +17,7 @@
 <body>
 	
 	<div class="header">
-		<h1>HEADER</h1>
+		<h1>Time Based Incremental</h1>
 	</div>
 
 	<div class="navbar">
@@ -34,7 +34,7 @@
 			<span>ressources</span> <br>
 			money: <span id="money">0</span><br>
 			mps: <span id="moneyPerSecond">0</span><br>
-			<!--automata Price: <span id="autoPrice" title="Hoverover Text">0</span><br>-->
+			inflation: <span id="inflation">0</span><br>
 			
 		</div>
 		<div class="right">
@@ -45,24 +45,12 @@
 			</div>
 			
 			<ul id="BuildingScreen" class="list-inline">
-				
 			</ul>
 			
 			<div id="UpgradeScreen">
-				<button onclick="save()">
-					save
+				<button onclick="buyInflation()">
+					buyInflation
 				</button>
-				<button onclick="load()">
-					load
-				</button>
-				<button onclick="wipe()">
-					wipe
-				</button>
-<!--				nothing<br>nothing<br>
-				nothing<br>nothing<br>
-				nothing<br>nothing<br>
-				nothing<br>nothing<br>
-				nothing<br>nothing<br>-->
 			</div>
 			
 		</div>
@@ -71,7 +59,12 @@
 	<div class="footer">
 		<span>
 			some text about the project, maybe version number, last change, latest update in words
-		</span><br>
+		</span>
+		<br>
+		<button onclick="save()">save</button>
+		<button onclick="load()">load</button>
+		<button onclick="wipe()">wipe</button>
+		<br>
 		<span>version 0.01</span>
 		last Save: <span id="lastSave">never</span>
 	</div>
