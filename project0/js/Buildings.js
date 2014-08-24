@@ -92,17 +92,34 @@ TimeBasedBuilding.prototype.produce = function(){
 };
 
 InflationBuilding.prototype.calculateCurrentCost = function(){
-	return this.baseCost * this.amount;
+	return this.baseCost * this.amount *0;
 };
 
 
 InflationBuilding.prototype.calculateInflationPower = function(){
-	var infPow = this.amount * this.power; // {0..infinity}
+	var infPowBase = this.amount * this.power; // {0..infinity}
+//	base case
+	if (infPowBase===0){
+		this.inflationPower = 1;
+		return;
+	}
+//	interesting one
+	var offset = 10;
+	var maxHalfLife = 30;
+	var minHalfLife = 1;
+
+	var scalingFunction = offset/(offset+infPowBase); // {1 .. 0}
+
+//	calculate the half life
+
+	var halfLife = (maxHalfLife-minHalfLife) * scalingFunction + minHalfLife; //{maxHalfLife..minHalfLife)}
+	var inflation = Math.pow(0.5, 1/halfLife); // the halfLife-th root of 0.5
+//	assert pow(inflation, halfLife) = 0.5
 	
-	var inversePow = Math.pow(0.99, infPow);
+	
 //	if (inversePow>0.5){inversePow=0.5;}
 	
-	this.inflationPower = inversePow;
+	this.inflationPower = inflation;
 };
 
 /*
