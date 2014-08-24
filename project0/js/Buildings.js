@@ -97,13 +97,12 @@ InflationBuilding.prototype.calculateCurrentCost = function(){
 
 
 InflationBuilding.prototype.calculateInflationPower = function(){
-	var infPow = Math.log(this.amount * this.power+1); // {0..infinity}
+	var infPow = this.amount * this.power; // {0..infinity}
 	
-	var inversePow = 1-1/(infPow+1);
-	inversePow /= 40;
+	var inversePow = Math.pow(0.99, infPow);
 //	if (inversePow>0.5){inversePow=0.5;}
 	
-	this.inflationPower = 1-inversePow;
+	this.inflationPower = inversePow;
 };
 
 /*
