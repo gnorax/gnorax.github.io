@@ -13,8 +13,6 @@
 * pressure
 * individual upgrades
 * inflation per click
-* change title
 * smaller header for Mobile
-* change inflation to 0.998^x or similar
 + eventListeners
 + progress bar
