@@ -7,33 +7,21 @@
 
 function goToClickerScreen(){
 	hideAll();
-	document.getElementById('ClickerScreen').style.visibility = "visible";
-	document.getElementById('ClickerScreen').style.width = "auto";
-	document.getElementById('ClickerScreen').style.height = "auto";
+	document.getElementById('ClickerScreen').style.display = "block";
 }
 function goToBuildingScreen(){
 	hideAll();
-	document.getElementById('BuildingScreen').style.visibility = "visible";
-	document.getElementById('BuildingScreen').style.width = "auto";
-	document.getElementById('BuildingScreen').style.height = "auto";
+	document.getElementById('BuildingScreen').style.display = "block";
 }
 function goToUpgradeScreen(){
 	hideAll();
-	document.getElementById('UpgradeScreen').style.visibility = "visible";
-	document.getElementById('UpgradeScreen').style.width = "auto";
-	document.getElementById('UpgradeScreen').style.height = "auto";
+	document.getElementById('UpgradeScreen').style.display = "block";
 }
 
 function hideAll(){
-	document.getElementById('ClickerScreen').style.visibility = "hidden";
-	document.getElementById('ClickerScreen').style.width = "0";
-	document.getElementById('ClickerScreen').style.height = "0";
-	document.getElementById('BuildingScreen').style.visibility = "hidden";
-	document.getElementById('BuildingScreen').style.width = "0";
-	document.getElementById('BuildingScreen').style.height = "0";
-	document.getElementById('UpgradeScreen').style.visibility = "hidden";
-	document.getElementById('UpgradeScreen').style.width = "0";
-	document.getElementById('UpgradeScreen').style.height = "0";
+	document.getElementById('ClickerScreen').style.display = "none";
+	document.getElementById('BuildingScreen').style.display = "none";
+	document.getElementById('UpgradeScreen').style.display = "none";
 }
 
 function printButtons(){

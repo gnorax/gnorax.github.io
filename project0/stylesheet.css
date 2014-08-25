@@ -77,17 +77,11 @@ and open the template in the editor.
 
 
 #ClickerScreen {
-	visibility: visible;
-	width: auto;
-	height: auto;
+	display: block;
 }
 #BuildingScreen {
-	visibility: hidden;
-	width: 0;
-	height: 0;
+	display: none;
 }
 #UpgradeScreen {
-	visibility: hidden;
-	width: 0;
-	height: 0;
+	display: none;
 }
