@@ -100,3 +100,12 @@ and open the template in the editor.
 #UpgradeScreen {
 	display: none;
 }
+
+@media screen and (device-pixel-ratio: 1)
+    and (device-width: 1024px)
+    and (max-device-height: 600px)
+    and (orientation: landscape),
+  screen and (device-pixel-ratio: 1)
+    and (device-width: 600px)
+    and (max-device-height: 1024px)
+    and (orientation: portrait){}
