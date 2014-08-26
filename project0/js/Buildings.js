@@ -65,6 +65,8 @@ function InflationBuilding(baseCost, power){
 	this.baseCost = baseCost;
 	this.power = power;
 	this.currentCost = baseCost;
+	this.halfLife = 30;
+	this.inflationPower = 1;
 }
 
 InflationBuilding.prototype = new GeneralBuilding();
@@ -92,9 +94,25 @@ TimeBasedBuilding.prototype.produce = function(){
 };
 
 InflationBuilding.prototype.calculateCurrentCost = function(){
+	console.log("Inflation bukdings cost no money");
 	return this.baseCost * this.amount *0;
 };
 
+/*
+ * sets this.halfLife to the new value
+ * @returns {undefined}
+ */
+InflationBuilding.prototype.calculateHalfLife = function(infPowBase){
+	var offset = 10;
+	var maxHalfLife = 30;
+	var minHalfLife = 1;
+
+	var scalingFunction = offset/(offset+infPowBase); // {1 .. 0}
+
+//	calculate the half life
+
+	this.halfLife = (maxHalfLife-minHalfLife) * scalingFunction + minHalfLife; //{maxHalfLife..minHalfLife)}
+};
 
 InflationBuilding.prototype.calculateInflationPower = function(){
 	var infPowBase = this.amount * this.power; // {0..infinity}
@@ -104,20 +122,9 @@ InflationBuilding.prototype.calculateInflationPower = function(){
 		return;
 	}
 //	interesting one
-	var offset = 10;
-	var maxHalfLife = 30;
-	var minHalfLife = 1;
-
-	var scalingFunction = offset/(offset+infPowBase); // {1 .. 0}
-
-//	calculate the half life
-
-	var halfLife = (maxHalfLife-minHalfLife) * scalingFunction + minHalfLife; //{maxHalfLife..minHalfLife)}
-	var inflation = Math.pow(0.5, 1/halfLife); // the halfLife-th root of 0.5
+	this.calculateHalfLife(infPowBase);
+	var inflation = Math.pow(0.5, 1/this.halfLife); // the halfLife-th root of 0.5
 //	assert pow(inflation, halfLife) = 0.5
-	
-	
-//	if (inversePow>0.5){inversePow=0.5;}
 	
 	this.inflationPower = inflation;
 };

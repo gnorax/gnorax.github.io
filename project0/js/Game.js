@@ -8,7 +8,7 @@
 var game = {
 	money:0,
 	moneyPerSecond:0,
-	inflation:0,
+	inflation:1,
 	
 	timeBasedBuildings:[],
 	inflationBuildings:[],
@@ -29,7 +29,7 @@ function init(){
 function newGame(){
 	game.money =0;
 	game.moneyPerSecond = 0;
-	game.inflation = 0;
+	game.inflation = 1;
 	game.lastSave =  undefined;
 	game.timeBasedBuildings = [];
 	game.inflationBuildings = [];
@@ -50,10 +50,10 @@ function globalProduction(){
 	return gProd;
 };
 function globalInflation(){
-	var gInf = 0;
+	var gInf = 1;
 	for (var i in game.inflationBuildings){
 		var building = game.inflationBuildings[i];
-		gInf += building.inflationPower;
+		gInf *= building.inflationPower;
 	}
 	return gInf;
 };

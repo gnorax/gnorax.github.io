@@ -35,7 +35,7 @@ function printButtons(){
 	var element = document.createElement("div");
 	element.setAttribute("id", "removeMe");
 	for (var i in game.timeBasedBuildings){
-			var button = generateButton(i);
+			var button = generateTBBButton(i);
 			element.appendChild(button);
 //			console.log(button);
 //			console.log(element);
@@ -45,7 +45,7 @@ function printButtons(){
 	printButtonText();
 };
 
-function generateButton(i){
+function generateTBBButton(i){
 	var divBox = document.createElement("li");
 //	divBox.setAttribute("title", "something");
 	divBox.setAttribute("id", "buyButtonTBB"+i.toString());
@@ -98,7 +98,18 @@ function printCurrentRessources(){
 
 function printAll(){
 	printCurrentRessources();
-}
+	printInflation();
+};
+
+function printInflation(){
+	if (game.inflationBuildings.length !== 1){
+		throw "Not just 1 Type of inflation buildings";
+	}
+	var infBuilding = game.inflationBuildings[0];
+	document.getElementById("inflationCost").innerHTML = niceNumbers(infBuilding.currentCost);
+	document.getElementById("inflationAmount").innerHTML = niceNumbers(infBuilding.amount);
+	document.getElementById("halfLife").innerHTML = niceNumbers(infBuilding.halfLife);
+};
 
 function printButtonText(){
 	for (var i in game.timeBasedBuildings){

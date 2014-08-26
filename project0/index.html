@@ -48,9 +48,17 @@
 			</ul>
 			
 			<div id="UpgradeScreen">
-				<button onclick="buyInflation()">
-					buyInflation
-				</button>
+				<ul id="InflationBox">
+					
+					<li><span>Inflation</span></li>
+					<li>Half-life: <span id="halfLife">infinite</span></li>
+					<li>Amount: <span id="inflationAmount">0</span></li>
+					<li>Cost: <span id="inflationCost">0</span></li>
+					<li>
+						<button onclick="buyInflation()">buyInflation</button>
+					</li>
+				</ul>
+					
 			</div>
 			
 		</div>
