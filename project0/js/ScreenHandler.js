@@ -51,6 +51,15 @@ function generateTBBButton(i){
 	divBox.setAttribute("id", "buyButtonTBB"+i.toString());
 	divBox.setAttribute("class", "buyBox");
 	
+	var name = document.createElement("span");
+	name.setAttribute("id", "nameTBB"+i.toString());
+	var textNode = document.createTextNode("name");
+	name.appendChild(textNode);
+	divBox.appendChild(name);
+	
+	var br = document.createElement("br");
+	divBox.appendChild(br);	
+	
 	var buyCost = document.createElement("span");
 	buyCost.setAttribute("id", "costTBB"+i.toString());
 	var textNode = document.createTextNode("current cost");
@@ -113,6 +122,10 @@ function printInflation(){
 
 function printButtonText(){
 	for (var i in game.timeBasedBuildings){
+		var costTBB = document.getElementById("nameTBB"+i.toString());
+		if (costTBB !==null){
+			costTBB.innerHTML = game.timeBasedBuildings[i].name;
+		}
 		var costTBB = document.getElementById("costTBB"+i.toString());
 		if (costTBB !==null){
 			costTBB.innerHTML = "cost: " + niceNumbers(game.timeBasedBuildings[i].currentCost);

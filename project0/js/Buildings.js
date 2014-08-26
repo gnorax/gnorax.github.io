@@ -94,8 +94,7 @@ TimeBasedBuilding.prototype.produce = function(){
 };
 
 InflationBuilding.prototype.calculateCurrentCost = function(){
-	console.log("Inflation bukdings cost no money");
-	return this.baseCost * this.amount *0;
+	return this.baseCost * Math.pow(2,this.amount);
 };
 
 /*
