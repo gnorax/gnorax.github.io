@@ -9,6 +9,7 @@ var game = {
 	money:0,
 	moneyPerSecond:0,
 	inflation:1,
+	autobuySelection:0,
 	
 	timeBasedBuildings:[],
 	inflationBuildings:[],
@@ -30,6 +31,7 @@ function newGame(){
 	game.money =0;
 	game.moneyPerSecond = 0;
 	game.inflation = 1;
+	game.autobuySelection = 0;
 	game.lastSave =  undefined;
 	game.timeBasedBuildings = [];
 	game.inflationBuildings = [];
@@ -93,6 +95,7 @@ function wipe() {
 	if (confirm("do you want to wipe your save state")){
 		localStorage.removeItem('storedGame');
 		newGame();
+		printButtons();
 	}
 };
 
@@ -100,14 +103,22 @@ function wipe() {
 var TickTimer = window.setInterval(function(){tick();}, 1000);
 
 function tick(){
+//	production
 	game.money += game.moneyPerSecond;
+//	inflation
 	for (var i in game.inflationBuildings){
 		game.inflationBuildings[i].produce();
 	}
-	printAll();
+//	autobuy
+	if (game.autobuySelection!==0){
+		autobuy();
+	}
+//	adding new tbbs
 	if (game.timeBasedBuildings[game.timeBasedBuildings.length-1].amount>2){
 		addTBB();
 	}
+//	print changes
+	printAll();
 }
 
 var SaveTimer = window.setInterval(function(){save();}, 15*1000);
@@ -149,3 +160,37 @@ function addTBB(){
 	game.timeBasedBuildings[game.timeBasedBuildings.length] = newBuilding;
 	printButtons();
 };
+
+function setAutobuySelection(){
+	var select = document.getElementById("autobuySelect");
+	game.autobuySelection =	select.options[select.selectedIndex].value;
+};
+
+function autobuy(){
+	for (i=game.timeBasedBuildings.length-1;i>=0;i--){
+		var b = game.timeBasedBuildings[i];
+		var maxCost = calculateMaxCost(b);
+		if (b.currentCost <=maxCost){
+//			TODO: maybe check for game.money for speedup?
+//			b.add();
+			buyTBB(i);
+		}
+	}
+};
+
+function calculateMaxCost(building){
+	switch (game.autobuySelection){
+		case "1":
+			return building.amount*building.baseProduction;
+		case "2":
+			return game.moneyPerSecond;
+		case "3":
+			return game.money;
+		default:
+			return 0;
+	}
+};
+
+function addAutobuyLvl(){
+	throw "not implemented"
+}

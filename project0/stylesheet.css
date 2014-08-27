@@ -77,7 +77,7 @@ and open the template in the editor.
 	border: black 2px solid;
 }
 
-#InflationBox{
+.UpgradeBox{
 	list-style: none outside none;
 	/*display: list;*/
 	padding-left: 0;
@@ -87,9 +87,14 @@ and open the template in the editor.
 	border: black 2px solid;
 }
 
-#InflationBox li{
+.UpgradeBox li{
 	/*display: block;*/
 }
+
+#InflationBox{
+	
+}
+
 
 #ClickerScreen {
 	display: block;

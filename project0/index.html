@@ -49,6 +49,19 @@
 					<td>Inflation: </td>
 					<td><span id="inflation">0</span></td>
 				</tr>
+				<tr>
+					<td>Autobuy: </td>
+						<td>
+							
+						<select id="autobuySelect" onchange="setAutobuySelection()"> 
+							<option value="0">none</option>
+							<option value="1">local</option>
+							<option value="2">global</option>
+							<option value="3">EXTREME</option>
+						</select> 
+							
+						</td>
+				</tr>
 			</table>
 			
 			
@@ -67,7 +80,7 @@
 			</ul>
 			
 			<div id="UpgradeScreen">
-				<ul id="InflationBox">
+				<ul id="InflationBox" class="UpgradeBox">
 					
 					<li><span>Inflation</span></li>
 					<li>Half-life: <span id="halfLife">infinite</span></li>
@@ -75,6 +88,16 @@
 					<li>Cost: <span id="inflationCost">0</span></li>
 					<li>
 						<button onclick="buyInflation()">buyInflation</button>
+					</li>
+				</ul>
+				
+				<ul id="AutobuyBox" class="UpgradeBox">
+					
+					<li><span>Autobuy</span></li>
+					<li><span id="AutobuyExplained">this is autobuy</span></li>
+					<li>Cost: <span id="autobuyCost">0</span></li>
+					<li>
+						<button onclick="addAutobuyLvl()">buy Autobuy</button>
 					</li>
 				</ul>
 					

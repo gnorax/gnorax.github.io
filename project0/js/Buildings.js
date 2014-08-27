@@ -106,11 +106,13 @@ InflationBuilding.prototype.calculateHalfLife = function(infPowBase){
 	var maxHalfLife = 30;
 	var minHalfLife = 1;
 
-	var scalingFunction = offset/(offset+infPowBase); // {1 .. 0}
-
-//	calculate the half life
-
-	this.halfLife = (maxHalfLife-minHalfLife) * scalingFunction + minHalfLife; //{maxHalfLife..minHalfLife)}
+	if (infPowBase<1){
+		this.halfLife = maxHalfLife;
+	}else{
+		var scalingFunction = offset/(offset+(infPowBase-1)); // {1 .. 0}
+		//	calculate the half life
+		this.halfLife = (maxHalfLife-minHalfLife) * scalingFunction + minHalfLife; //{maxHalfLife..minHalfLife)}
+	}
 };
 
 InflationBuilding.prototype.calculateInflationPower = function(){
