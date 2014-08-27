@@ -8,6 +8,7 @@
 + upgrades
 + buildings
 + inflation
++ autobuy
 
 ##TODO:
 * pressure
@@ -16,3 +17,4 @@
 * smaller header for Mobile
 + eventListeners
 + progress bar
++ autobuy buyable
