@@ -131,7 +131,7 @@ function getMoney(){
 
 function buyTBB(number){
 	var b = game.timeBasedBuildings[number];
-	console.log(b);
+//	console.log(b);
 	if (b instanceof TimeBasedBuilding){
 		b.add();
 	}else{throw "Is not A TBB anymore";}
@@ -142,7 +142,7 @@ function buyTBB(number){
 function buyInflation(number){
 	if (number===undefined){number=0;}
 	var b = game.inflationBuildings[number];
-	console.log(b);
+//	console.log(b);
 	if (b instanceof InflationBuilding){
 		b.add();
 		b.calculateInflationPower();

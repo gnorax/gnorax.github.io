@@ -37,8 +37,6 @@ function printButtons(){
 	for (var i in game.timeBasedBuildings){
 			var button = generateTBBButton(i);
 			element.appendChild(button);
-//			console.log(button);
-//			console.log(element);
 		}
 	document.getElementById("BuildingScreen").appendChild(element);
 	
@@ -148,6 +146,11 @@ function printButtonText(){
  * @returns string
  */
 function niceNumbers(number){
+	
+	if (number === Number.POSITIVE_INFINITY){
+		return Number.POSITIVE_INFINITY;
+	}
+	
 	var digits = 3;
 	
 	var e10=0;

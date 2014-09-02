@@ -65,7 +65,7 @@ function InflationBuilding(baseCost, power){
 	this.baseCost = baseCost;
 	this.power = power;
 	this.currentCost = baseCost;
-	this.halfLife = 30;
+	this.halfLife = Number.POSITIVE_INFINITY;
 	this.inflationPower = 1;
 }
 
@@ -107,7 +107,7 @@ InflationBuilding.prototype.calculateHalfLife = function(infPowBase){
 	var minHalfLife = 1;
 
 	if (infPowBase<1){
-		this.halfLife = maxHalfLife;
+		this.halfLife = Number.POSITIVE_INFINITY;
 	}else{
 		var scalingFunction = offset/(offset+(infPowBase-1)); // {1 .. 0}
 		//	calculate the half life
