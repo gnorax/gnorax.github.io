@@ -11,10 +11,14 @@
 + autobuy
 
 ##TODO:
-* pressure
-* individual upgrades
-* inflation per click
-* smaller header for Mobile
-+ eventListeners
-+ progress bar
-+ autobuy buyable
+* ## mobile
+* * different css
+* * smaller header for Mobile
+* ## tech
+* + eventListeners
+* ## game
+* * pressure
+* * individual upgrades
+* * inflation per click
+* + progress bar
+* + autobuy buyable
