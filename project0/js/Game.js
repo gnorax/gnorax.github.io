@@ -207,8 +207,9 @@ function densenBuilding(buildingID){
 	assert (building instanceof TimeBasedBuilding);
 	var usedPressure = building.densen(game.pressure);
 	
+//	update the values
 	game.pressure -= usedPressure;
-	
+	game.moneyPerSecond = globalProduction();
 	printAll();
 };
 
