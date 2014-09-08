@@ -1,14 +1,18 @@
 # README #
 
 ## DONE:
-* Click Button -> increments counter
-* show current value
-+ store/load
-+ different screens
-+ upgrades
-+ buildings
-+ inflation
-+ autobuy
+* ## tech
+* * Click Button -> increments counter
+* * show current value
+* * store/load
+* * different screens
+* ## game
+* * upgrades
+* * buildings
+* * inflation
+* * autobuy
+* * pressure
+* * individual upgrades
 
 ##TODO:
 * ## mobile
@@ -17,8 +21,6 @@
 * ## tech
 * + eventListeners
 * ## game
-* * pressure
-* * individual upgrades
 * * inflation per click
 * + progress bar
 * + autobuy buyable
