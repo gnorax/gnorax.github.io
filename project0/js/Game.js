@@ -10,6 +10,7 @@ var game = {
 	moneyPerSecond:0,
 	inflation:1,
 	autobuySelection:0,
+	pressure:0,
 	
 	timeBasedBuildings:[],
 	inflationBuildings:[],
@@ -31,6 +32,7 @@ function newGame(){
 	game.money =0;
 	game.moneyPerSecond = 0;
 	game.inflation = 1;
+	game.pressure = 0;
 	game.autobuySelection = 0;
 	game.lastSave =  undefined;
 	game.timeBasedBuildings = [];

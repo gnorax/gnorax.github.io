@@ -51,6 +51,7 @@ function TimeBasedBuilding(costInSeconds, baseProduction){
 	this.costInSeconds = costInSeconds;
 	this.baseProduction = baseProduction;
 	this.currentCost = baseProduction*10;
+	this.multiplier = 1;
 }
 
 TimeBasedBuilding.prototype = new GeneralBuilding();
@@ -71,26 +72,47 @@ function InflationBuilding(baseCost, power){
 
 InflationBuilding.prototype = new GeneralBuilding();
 
-function DerivedBuilding(baseCost, costType, baseProduction){
-	this.baseCost = baseCost;
-	this.costType = costType;
-	this.baseProduction = baseProduction;
-}
-
-DerivedBuilding.prototype = new GeneralBuilding();
+//function DerivedBuilding(baseCost, costType, baseProduction){
+//	this.baseCost = baseCost;
+//	this.costType = costType;
+//	this.baseProduction = baseProduction;
+//}
+//
+//DerivedBuilding.prototype = new GeneralBuilding();
 
 /* functions
  * 
  */
 
-
+TimeBasedBuilding.prototype.densen = function(pressure){
+	var sacrificedBuildings = this.amount - 1;
+	if (sacrificedBuildings<1){
+		return false; // not enough buildings
+	}
+	pressure -= this.costInSeconds;
+	if (pressure<0){
+		return false; // not enough pressure
+	}
+	
+	var power = sacrificedBuildings * pressure /100;
+	this.multiplier += power;
+	
+	return true;
+	
+};
 
 TimeBasedBuilding.prototype.calculateCurrentCost = function(){
-	return this.costInSeconds*globalProduction();
+	if (this.multiplier === 1){
+		return this.costInSeconds*globalProduction();
+	}else{
+//		costs ignore multiplier
+		var cost = this.costInSeconds*globalProduction();
+		return cost - this.produce()*(this.multiplier-1);
+	}
 };
 
 TimeBasedBuilding.prototype.produce = function(){
-	return this.amount*this.baseProduction;	
+	return this.amount * this.baseProduction * this.multiplier;	
 };
 
 InflationBuilding.prototype.calculateCurrentCost = function(){

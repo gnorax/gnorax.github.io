@@ -90,6 +90,7 @@ function generateTBBButton(i){
 	var node = document.createTextNode("buy TBB "+i);
 	newButton.appendChild(node);
 	divBox.appendChild(newButton);
+	
 	divBox.style.width = "30%";
 	divBox.style.border = "black solid 2px";
 	return divBox;
