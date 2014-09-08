@@ -87,17 +87,26 @@ InflationBuilding.prototype = new GeneralBuilding();
 TimeBasedBuilding.prototype.densen = function(pressure){
 	var sacrificedBuildings = this.amount - 1;
 	if (sacrificedBuildings<1){
-		return false; // not enough buildings
+		console.log("not enough buildings");
+		return 0; // not enough buildings
 	}
-	pressure -= this.costInSeconds;
-	if (pressure<0){
-		return false; // not enough pressure
+	var maxPressure = sacrificedBuildings * this.costInSeconds;
+	var minPressure = maxPressure*0.1;
+	
+	if (pressure<minPressure){
+		console.log("not enough pressure");
+		return 0; // not enough pressure
 	}
+	if (pressure>maxPressure){
+		pressure=maxPressure;
+	}
+//	pressure between min and max
+
+	var power = pressure/maxPressure;
+	this.multiplier += power*sacrificedBuildings/100;
 	
-	var power = sacrificedBuildings * pressure /100;
-	this.multiplier += power;
-	
-	return true;
+	this.amount = 1;
+	return pressure;
 	
 };
 
@@ -106,8 +115,8 @@ TimeBasedBuilding.prototype.calculateCurrentCost = function(){
 		return this.costInSeconds*globalProduction();
 	}else{
 //		costs ignore multiplier
-		var cost = this.costInSeconds*globalProduction();
-		return cost - this.produce()*(this.multiplier-1);
+		var prod = globalProduction() - this.produce() + this.amount*this.baseProduction;
+		return this.costInSeconds * prod ;
 	}
 };
 

@@ -129,6 +129,10 @@ function getMoney(){
 	game.money += 1*1000;
 	printAll();
 };
+function getPressure(){
+	game.pressure += 1*1000;
+	printAll();
+};
 
 
 function buyTBB(number){
@@ -183,7 +187,7 @@ function autobuy(){
 function calculateMaxCost(building){
 	switch (game.autobuySelection){
 		case "1":
-			return building.amount*building.baseProduction;
+			return building.amount*building.baseProduction*building.multiplier;
 		case "2":
 			return game.moneyPerSecond;
 		case "3":
@@ -195,4 +199,24 @@ function calculateMaxCost(building){
 
 function addAutobuyLvl(){
 	throw "not implemented"
+};
+
+function densenBuilding(buildingID){
+	assert (buildingID < game.timeBasedBuildings.length);
+	var building = game.timeBasedBuildings[buildingID];
+	assert (building instanceof TimeBasedBuilding);
+	var usedPressure = building.densen(game.pressure);
+	
+	game.pressure -= usedPressure;
+	
+	printAll();
+};
+
+
+function assert(cond, exept){
+	if (cond){
+		return;
+	}else{
+		throw exept;
+	}
 }

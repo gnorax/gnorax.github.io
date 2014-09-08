@@ -91,6 +91,12 @@ function generateTBBButton(i){
 	newButton.appendChild(node);
 	divBox.appendChild(newButton);
 	
+	var newButton = document.createElement("button");
+	newButton.setAttribute("onclick", "densenBuilding("+i+")");
+	var node = document.createTextNode("densen TBB "+i);
+	newButton.appendChild(node);
+	divBox.appendChild(newButton);
+	
 	divBox.style.width = "30%";
 	divBox.style.border = "black solid 2px";
 	return divBox;
@@ -101,6 +107,7 @@ function printCurrentRessources(){
 	document.getElementById("money").innerHTML = niceNumbers(game.money);
 	document.getElementById("moneyPerSecond").innerHTML = niceNumbers(game.moneyPerSecond);
 	document.getElementById("inflation").innerHTML = niceNumbers(game.inflation);
+	document.getElementById("pressure").innerHTML = niceNumbers(game.pressure);
 	printButtonText();
 };
 
@@ -135,7 +142,7 @@ function printButtonText(){
 		}
 		costTBB = document.getElementById("productionTBB"+i.toString());
 		if (costTBB !==null){
-			costTBB.innerHTML = "production: " + niceNumbers(game.timeBasedBuildings[i].baseProduction);
+			costTBB.innerHTML = "production: " + niceNumbers(game.timeBasedBuildings[i].baseProduction * game.timeBasedBuildings[i].multiplier);
 		}
 	}
 };
