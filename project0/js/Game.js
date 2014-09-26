@@ -123,6 +123,7 @@ function tick(){
 	printAll();
 }
 
+// save every 15 seconds
 var SaveTimer = window.setInterval(function(){save();}, 15*1000);
 
 function getMoney(){
@@ -177,8 +178,6 @@ function autobuy(){
 		var b = game.timeBasedBuildings[i];
 		var maxCost = calculateMaxCost(b);
 		if (b.currentCost <=maxCost){
-//			TODO: maybe check for game.money for speedup?
-//			b.add();
 			buyTBB(i);
 		}
 	}
@@ -187,7 +186,12 @@ function autobuy(){
 function calculateMaxCost(building){
 	switch (game.autobuySelection){
 		case "1":
-			return building.amount*building.baseProduction*building.multiplier;
+			var cost = building.amount*building.baseProduction*building.multiplier;
+			if (cost>1){
+				return cost;
+			}else{
+				return 1;
+			}
 		case "2":
 			return game.moneyPerSecond;
 		case "3":
@@ -198,7 +202,7 @@ function calculateMaxCost(building){
 };
 
 function addAutobuyLvl(){
-	throw "not implemented"
+	throw "not implemented";
 };
 
 function densenBuilding(buildingID){

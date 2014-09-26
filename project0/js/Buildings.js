@@ -101,9 +101,11 @@ TimeBasedBuilding.prototype.densen = function(pressure){
 		pressure=maxPressure;
 	}
 //	pressure between min and max
-
 	var power = pressure/maxPressure;
-	this.multiplier += power*sacrificedBuildings/100;
+	
+//	becomes more powerfull after 100 buildings sacrificed
+	var newMult = Math.floor(this.multiplier)*power*sacrificedBuildings/100;
+	this.multiplier += newMult;
 	
 	this.amount = 1;
 	return pressure;
@@ -111,13 +113,7 @@ TimeBasedBuilding.prototype.densen = function(pressure){
 };
 
 TimeBasedBuilding.prototype.calculateCurrentCost = function(){
-	if (this.multiplier === 1){
-		return this.costInSeconds*globalProduction();
-	}else{
-//		costs ignore multiplier
-		var prod = globalProduction() - this.produce() + this.amount*this.baseProduction;
-		return this.costInSeconds * prod ;
-	}
+	return this.costInSeconds*globalProduction();
 };
 
 TimeBasedBuilding.prototype.produce = function(){
