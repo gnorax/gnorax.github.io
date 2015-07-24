@@ -6,12 +6,32 @@ and open the template in the editor.
 -->
 <html>
 	<head>
+		<link rel="stylesheet" href="style.css" type="text/css"/>
+		<script src="game.js" type="text/javascript" ></script>
+
 		<title>TODO supply a title</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
-		<div class="side">left side</div>
-		<div class="main">right side</div>
+
+		<div class="side">
+			<ul>
+				<li id="money">Money</li>
+				<li id="production">Money/time</li>
+				<li id="Inflation">Inflation</li>
+				<li>Autobuy</li>
+			</ul>
+		</div>
+
+		<div class="main">
+			<div>Box</div>
+			<progress id="box1_progress" value="0" max="20"></progress>
+			<button onclick="setMoney(getMoney()+1)">buy</button>
+		</div>
+
+		<!--<script>setInterval(gamestep(), 1000);</script>-->
+
 	</body>
+
 </html>

@@ -1,0 +1,14 @@
+
+.side {
+
+	position: fixed;
+	float:left;
+	width: 30%;
+	overflow: auto;
+}
+.main{
+	float:right;
+	width: 65%;
+	height: auto;
+	/*overflow: auto;*/
+}
