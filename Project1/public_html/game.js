@@ -19,6 +19,10 @@ var setMoney = function (i) {
 	data.money = i;
 	printMoney();
 };
+var decreaseMoney = function(i){
+	assert(getMoney()>=i);
+	setMoney(getMoney()-i);
+};
 var getMoney = function () {
 	return data.money;
 };
@@ -28,7 +32,7 @@ var printMoney = function () {
 		var id = ids[i];
 		$(id).innerHTML = getMoney();
 	}
-	$("box1_progress").value=getMoney();
+	$("progress_box1").value=getMoney();
 };
 var setProduction = function (i) {
 	data.production = i;

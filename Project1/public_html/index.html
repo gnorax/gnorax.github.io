@@ -8,6 +8,8 @@ and open the template in the editor.
 	<head>
 		<link rel="stylesheet" href="style.css" type="text/css"/>
 		<script src="game.js" type="text/javascript" ></script>
+		<script src="objects.js" type="text/javascript" ></script>
+		<script src="screenHandler.js" type="text/javascript" ></script>
 
 		<title>TODO supply a title</title>
 		<meta charset="UTF-8">
@@ -17,7 +19,12 @@ and open the template in the editor.
 
 		<div class="side">
 			<ul>
-				<li id="money">Money</li>
+				<li>
+					<div id="money">Money</div>
+					<div>
+						<button onclick="setMoney(getMoney() + 1)">add Money</button>
+					</div>
+				</li>
 				<li id="production">Money/time</li>
 				<li id="Inflation">Inflation</li>
 				<li>Autobuy</li>
@@ -25,12 +32,19 @@ and open the template in the editor.
 		</div>
 
 		<div class="main">
-			<div>Box</div>
-			<progress id="box1_progress" value="0" max="20"></progress>
-			<button onclick="setMoney(getMoney()+1)">buy</button>
+		<div><button onclick="$('main').appendChild(createBuilding(new TimeBasedBuilding('box2',1,1)))">create</button></div>
+		<div id="main"></div>
+			<div id="box1">
+				<div>Box</div>
+				<div id="cost_box1">Cost</div>
+				<progress id="progress_box1" value="0" max="20.5"></progress>
+				<div id="production_box1">Production</div>
+				<div id="buy_box1">Buy</div>
+				<div id="amount_box1"  >Amount</div>
+			</div>
 		</div>
 
-		<!--<script>setInterval(gamestep(), 1000);</script>-->
+		<script>setInterval(function(){gamestep()}, 1000);</script>
 
 	</body>
 
