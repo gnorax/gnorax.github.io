@@ -5,6 +5,8 @@
  */
 
 
+/* global TimeBasedBuilding */
+
 var game = {
 	money:0,
 	moneyPerSecond:0,

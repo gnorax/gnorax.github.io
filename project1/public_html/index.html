@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css" type="text/css"/>
+		<script src="game.js" type="text/javascript" ></script>
+		<script src="objects.js" type="text/javascript" ></script>
+		<script src="screenHandler.js" type="text/javascript" ></script>
+
+		<title>TODO supply a title</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+
+		<div class="side">
+			<ul>
+				<li>
+					<div id="money">Money</div>
+					<div>
+						<button onclick="setMoney(getMoney() + 1)">add Money</button>
+					</div>
+				</li>
+				<li id="production">Money/time</li>
+				<li id="Inflation">Inflation</li>
+				<li>Autobuy</li>
+			</ul>
+		</div>
+
+		<div class="main">
+		<div><button onclick="$('main').appendChild(createBuilding(new TimeBasedBuilding('box2',1,1)))">create</button></div>
+		<div id="main"></div>
+			<div id="box1">
+				<div>Box</div>
+				<div id="cost_box1">Cost</div>
+				<progress id="progress_box1" value="0" max="20.5"></progress>
+				<div id="production_box1">Production</div>
+				<div id="buy_box1">Buy</div>
+				<div id="amount_box1"  >Amount</div>
+			</div>
+		</div>
+
+		<script>setInterval(function(){gamestep()}, 1000);</script>
+
+	</body>
+
+</html>

@@ -9,6 +9,8 @@
  * @param {type} name
  * @returns {GeneralBuilding}
  */
+/* global game */
+
 function GeneralBuilding(name){
 	this.name = name;
 	this.amount = 0;
@@ -34,10 +36,10 @@ function GeneralBuilding(name){
 		}
 	};
 	this.produce = function(){
-		throw "should be overwritten by special Buildings"
+		throw "should be overwritten by special Buildings";
 	};
 	this.calculateCurrentCost = function(){
-		throw "should be overwritten by special Buildings"
+		throw "should be overwritten by special Buildings";
 	};
 };
 

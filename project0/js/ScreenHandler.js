@@ -5,6 +5,8 @@
  */
 
 
+/* global game */
+
 function goToClickerScreen(){
 	hideAll();
 	document.getElementById('ClickerScreen').style.display = "block";
