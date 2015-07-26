@@ -23,6 +23,15 @@ function Building(name){
 	this.getAmount=function(){
 		return this.amount;
 	};
+	this.incrementAmount=function(){
+		this.amount=this.getAmount()+1;
+		$("amount_"+this.name).innerHTML=this.amount;
+	};
+	this.setCost=function(cost){
+		this.currentCost=cost;
+		$("cost_"+this.name).innerHTML=this.currentCost;
+		$("progress_"+this.name).max=this.currentCost;
+	};
 /*
  * increments amount, decreases money, refreshes costs
  * 
@@ -34,9 +43,11 @@ function Building(name){
 			// remove money
 			decreaseMoney(this.currentCost);
 			// add to amount
-			this.amount += 1;		
+//			this.amount += 1;
+			this.incrementAmount();
 			// calculate new cost
-			this.currentCost = this.calculateCurrentCost();
+			this.setCost(this.calculateCurrentCost());
+
 		}else{
 			console.log(this.name + " was too expensive");
 		}
@@ -70,7 +81,7 @@ function TimeBasedBuilding(name, costInSeconds, baseProduction){
 TimeBasedBuilding.prototype = new Building();
 
 TimeBasedBuilding.prototype.calculateCurrentCost = function(){
-	return this.costInSeconds*getProduction();
+	return this.costInSeconds*getGlobalProduction();
 };
 
 TimeBasedBuilding.prototype.produce = function(){

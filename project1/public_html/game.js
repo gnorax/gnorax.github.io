@@ -12,40 +12,49 @@ var $ = function (id) {
 var data = {
 	money: 0,
 	production: 0,
-	inflation: 0
+	inflation: 0,
+	buildings: new Array()
 };
 
 var setMoney = function (i) {
 	data.money = i;
 	printMoney();
 };
-var decreaseMoney = function(i){
-	assert(getMoney()>=i);
-	setMoney(getMoney()-i);
+var decreaseMoney = function (i) {
+	assert(getMoney() >= i);
+	setMoney(getMoney() - i);
 };
 var getMoney = function () {
 	return data.money;
 };
 var printMoney = function () {
-	var ids = ["money"];
-	for (var i = 0; i < ids.length; i++) {
-		var id = ids[i];
-		$(id).innerHTML = getMoney();
+	$("money").innerHTML = getMoney();
+	for (var i = 0; i < data.buildings.length; i++) {
+		// update progress
+		$("progress_" + i).value = getMoney();
+		//update button
+		var b = data.buildings[i];
+		if (b.getCost() > getMoney()) {
+			$("buy_" + i).disabled = true;
+		}else{
+			$("buy_" + i).disabled = false;
+		}
+
+
 	}
-	$("progress_box1").value=getMoney();
 };
-var setProduction = function (i) {
+var setGlobalProduction = function (i) {
 	data.production = i;
 	printProduction();
 };
-var getProduction = function () {
+var getGlobalProduction = function () {
 	return data.production;
 };
 var printProduction = function () {
 	var ids = ["production"];
 	for (var i = 0; i < ids.length; i++) {
 		var id = ids[i];
-		$(id).innerHTML = getProduction();
+		$(id).innerHTML = getGlobalProduction();
 	}
 };
 var setInflation = function (i) {
@@ -65,10 +74,30 @@ var printInflation = function () {
 
 
 var gamestep = function () {
-	setMoney(getMoney() + getProduction());
+	setMoney(getMoney() + getGlobalProduction());
 	applyInflation();
 };
 
 var applyInflation = function () {
 
 };
+
+var buy = function (buildingID) {
+//	assert(buildingID instanceof Number);
+	var building = data.buildings[buildingID];
+	building.add();
+
+	var prod = 0;
+	for (var i = 0; i < data.buildings.length; i++) {
+		var b = data.buildings[i];
+		prod += b.getAmount() * b.getProduction();
+	}
+	setGlobalProduction(prod);
+};
+
+
+var assert = function (t) {
+	if (!t) {
+		throw "Exception";
+	}
+}

@@ -1,6 +1,5 @@
 
 .side {
-
 	position: fixed;
 	float:left;
 	width: 30%;
@@ -11,4 +10,22 @@
 	width: 65%;
 	height: auto;
 	/*overflow: auto;*/
+}
+.box{
+	width:30%;
+	padding: 4px;
+	border: 1px black solid;
+	/*border-color: black;*/
+}
+.box .cost::before{
+	content:"Cost: ";
+}
+.box .production::before{
+	content:"Production: ";
+}
+.box .amount::before{
+	content:"Amount: ";
+}
+.box .amount{
+	float:right;
 }
